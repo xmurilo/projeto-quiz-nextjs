@@ -1,15 +1,18 @@
-// Next.js API route support: https://nextjs.org/docs/api-routes/introduction
-import { error } from "console";
 import type { NextApiRequest, NextApiResponse } from "next";
+import questions from "../bankQuestions";
 
 export default function handler(req: NextApiRequest, res: NextApiResponse) {
   if (typeof req.query.id === "undefined") {
-    res.status(400).json({ error: "Missing id parameter" });
-    return;
+    return res.status(400).json({ error: "Missing ID" });
   }
+  const selectedId = +req.query.id;
 
-  res.status(200).json({
-    id: +req.query.id,
-    name: "Pedro #02",
-  });
+  const questionOrNothing = questions.filter(question => question.id == selectedId);
+
+  if (questionOrNothing.length === 1) {
+    const selectedQuestion = questionOrNothing[0];
+    res.status(200).json(selectedQuestion);
+  } else {
+    res.status(204).send({ msg: "No content" });
+  }
 }
