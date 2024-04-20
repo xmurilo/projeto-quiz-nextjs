@@ -3,12 +3,19 @@ export default class AnswerModel {
   private _isCorrect: boolean;
   private _revealed: boolean;
 
-  constructor(value: string, isCorrect:boolean, revealed = false) {
+  constructor(value: string, isCorrect: boolean, revealed = false) {
     this._value = value;
     this._isCorrect = isCorrect;
     this._revealed = revealed;
   }
 
+  static isCorrect(value: string) {
+    return new AnswerModel(value, true);
+  }
+
+  static isWrong(value: string) {
+    return new AnswerModel(value, false);
+  }
 
   get value(): string {
     return this._value;
@@ -21,5 +28,4 @@ export default class AnswerModel {
   get revealed(): boolean {
     return this._revealed;
   }
-  
 }
