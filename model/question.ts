@@ -1,10 +1,12 @@
+import AnswerModel from "./answer";
+
 export default class QuestionModel {
   private _id: number;
   private _statement: string;
-  private _answers: any[];
+  private _answers: AnswerModel[];
   private _isCorrect: boolean;
 
-  constructor(id: number, statemant: string, answers: any[], isCorrect = false) {
+  constructor(id: number, statemant: string, answers: AnswerModel[], isCorrect = false) {
     this._id = id;
     this._statement = statemant;
     this._answers = answers;
@@ -26,4 +28,12 @@ export default class QuestionModel {
   get isCorrect(): boolean {
     return this._isCorrect;
   }
+
+  get answered(): boolean {
+    for (let answer of this._answers) {
+      if (answer.revealed) return true;
+    }
+    return false;
+  }
+  
 }
