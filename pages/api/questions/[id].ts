@@ -1,5 +1,5 @@
 import type { NextApiRequest, NextApiResponse } from "next";
-import questions from "../bankQuestions";
+import questions from "../questionsBank";
 
 export default function handler(req: NextApiRequest, res: NextApiResponse) {
   if (typeof req.query.id === "undefined") {
