@@ -1,4 +1,34 @@
 .answer {
   display: flex;
-  
+}
+
+.front,
+.back {
+  display: flex;
+
+}
+
+.front {
+  align-items: center;
+  border-radius: 12px;
+  padding: 15px;
+  color: #000;
+  background-color: #ffff;
+}
+
+.letter {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 40px;
+  width: 40px;
+  border-radius: 20px;
+  font-size: 1.3rem;
+  font-weight: bold;
+  margin-right: 20px;
+}
+
+.value {
+  font-size: 1.3rem;
+  font-weight: bold;
 }
