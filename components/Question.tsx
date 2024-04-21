@@ -5,6 +5,7 @@ import Answer from "./Answer";
 
 interface QuestionProps {
   value: QuestionModel;
+  onResponse: (index: number) => void;
 }
 
 const letters = [
@@ -26,6 +27,7 @@ export default function Question(props: QuestionProps) {
           index={i}
           letter={letters[i].value}
           backgroundColorLetter={letters[i].color}
+          onResponse={props.onResponse}
         />
       );
     });
