@@ -28,4 +28,8 @@ export default class AnswerModel {
   get revealed(): boolean {
     return this._revealed;
   }
+
+  toReveal() {
+    return new AnswerModel(this._value, this._isCorrect, true);
+  }
 }
