@@ -1,11 +1,23 @@
 .answer {
   display: flex;
+  min-width: 500px;
+  width: 80%;
+  height: 100px;
+  margin: 10px;
+}
+
+.contentAnswer {
+  display: flex;
+  flex: 1;
+  position: relative;
 }
 
 .front,
 .back {
+  position: absolute;
   display: flex;
-
+  height: 100%;
+  width: 100%;
 }
 
 .front {
