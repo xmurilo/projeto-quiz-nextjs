@@ -7,6 +7,13 @@ interface QuestionProps {
   value: QuestionModel;
 }
 
+const letters = [
+  { value: "A", color: "#F2C866" },
+  { value: "B", color: "#F266BA" },
+  { value: "C", color: "#85D4F2" },
+  { value: "D", color: "#BCE596" },
+];
+
 export default function Question(props: QuestionProps) {
   const question = props.value;
 
@@ -14,14 +21,14 @@ export default function Question(props: QuestionProps) {
     return question.answers.map((answer, i) => {
       return (
         <Answer
-          key={`${question.id}`}
+          key={i}
           value={answer}
           index={i}
-          letter={"A"}
-          backgroundColorLetter={"#F2C866"}
+          letter={letters[i].value}
+          backgroundColorLetter={letters[i].color}
         />
-      )
-    })
+      );
+    });
   }
   return (
     <div className={styles.question}>
