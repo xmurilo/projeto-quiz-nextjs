@@ -2,10 +2,12 @@ import QuestionModel from "@/model/question";
 import styles from "../styles/Question.module.css";
 import Statement from "./Statement";
 import Answer from "./Answer";
+import Timer from "./Timer";
 
 interface QuestionProps {
   value: QuestionModel;
   onResponse: (index: number) => void;
+  timeIsOver: () => void;
 }
 
 const letters = [
@@ -35,6 +37,7 @@ export default function Question(props: QuestionProps) {
   return (
     <div className={styles.question}>
       <Statement text={question.statement} />
+      <Timer duration={10} timeIsOver={props.timeIsOver} />
       {renderAnswers()}
     </div>
   );
