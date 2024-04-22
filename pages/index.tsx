@@ -14,8 +14,14 @@ export default function Home() {
   const [question, setQuestion] = useState<QuestionModel>(questionMock);
 
   function onResponse(index: number): void {
-    console.log(index);
     setQuestion(question.answerWith(index));
+  }
+
+  function timeIsOver(): void {
+    // * -1 significa que o usuário não respondeu a tempo e a resposta é considerada errada
+    if(question.isNotAnswered) {
+      setQuestion(question.answerWith(-1));
+    }
   }
 
   return (
@@ -27,7 +33,7 @@ export default function Home() {
         alignItems: "center",
       }}
     >
-      <Question value={question} onResponse={onResponse} />
+      <Question value={question} onResponse={onResponse} timeIsOver={timeIsOver} />
     </div>
   );
 }
