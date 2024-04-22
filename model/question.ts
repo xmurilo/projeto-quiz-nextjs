@@ -41,8 +41,11 @@ export default class QuestionModel {
   get answered(): boolean {
     return this._answered;
   }
-  
 
+  get isNotAnswered(): boolean {
+    return !this._answered;
+  }
+  
   get anyAnswerRevealed(): boolean {
     for (let answer of this._answers) {
       if (answer.revealed) return true;
