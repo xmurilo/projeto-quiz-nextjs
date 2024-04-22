@@ -28,6 +28,28 @@
   background-color: #ffff;
 }
 
+.back > div {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  flex: 1;
+  border-radius: 12px;
+}
+
+.isRight {
+  background-color: #2baa6d;
+}
+
+.wrong {
+  background-color: #e44a4c;
+}
+
+.isRight .value,
+.wrong .value {
+  font-size: 1.5rem;
+}
+
 .letter {
   display: flex;
   align-items: center;
