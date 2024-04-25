@@ -33,7 +33,11 @@ export default function Home() {
         alignItems: "center",
       }}
     >
-      <Question value={question} onResponse={onResponse} timeIsOver={timeIsOver} />
+      <Question 
+      value={question}
+      onResponse={onResponse}
+      timeIsOver={timeIsOver}
+      timeToResponse={11} />
     </div>
   );
 }
