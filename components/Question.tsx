@@ -7,6 +7,7 @@ import Timer from "./Timer";
 interface QuestionProps {
   value: QuestionModel;
   onResponse: (index: number) => void;
+  timeToResponse?: number;
   timeIsOver: () => void;
 }
 
@@ -37,8 +38,10 @@ export default function Question(props: QuestionProps) {
   return (
     <div className={styles.question}>
       <Statement text={question.statement} />
-      <Timer duration={10} timeIsOver={props.timeIsOver} />
+      <Timer duration={props.timeToResponse ?? 10} timeIsOver={props.timeIsOver} />
       {renderAnswers()}
     </div>
   );
 }
+
+// 
