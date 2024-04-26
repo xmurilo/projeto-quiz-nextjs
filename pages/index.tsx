@@ -1,8 +1,8 @@
-import Question from "@/components/Question";
-import Button from "@/components/Button";
 import AnswerModel from "@/model/answer";
 import QuestionModel from "@/model/question";
-import { useState } from "react";
+import { useEffect, useState } from "react";
+import Quiz from "@/components/Quiz";
+import { basename } from "path";
 
 const questionMock = new QuestionModel(1, "Melhor cor?", [
   AnswerModel.isCorrect("Roxo"),
@@ -11,19 +11,41 @@ const questionMock = new QuestionModel(1, "Melhor cor?", [
   AnswerModel.isWrong("Amarelo"),
 ]);
 
+const BASE_URL = "http://localhost:3000/api";
 export default function Home() {
   const [question, setQuestion] = useState<QuestionModel>(questionMock);
+  const [questionIds, setQuestionsIds] = useState<number[]>([]);
 
-  function onResponse(index: number): void {
-    setQuestion(question.answerWith(index));
-  }
-
-  function timeIsOver(): void {
-    // * -1 significa que o usuário não respondeu a tempo e a resposta é considerada errada
-    if (question.isNotAnswered) {
-      setQuestion(question.answerWith(-1));
+  async function loadQuestionsIds() {
+    try {
+      const resp = await fetch(`${BASE_URL}/quiz`);
+      const ids = await resp.json();
+      setQuestionsIds(ids);
+    } catch (e) {
+      console.log(e);
     }
   }
+  async function loadQuestion(idQuestion: number) {
+    try {
+      const resp = await fetch(`${BASE_URL}/questions/${idQuestion}`);
+      const json = await resp.json();
+      console.log(json);
+    } catch (e) {
+      console.log(e);
+    }
+  }
+
+  useEffect(() => {
+    loadQuestionsIds();
+  }, []);
+
+  useEffect(() => {
+    questionIds.length > 0 && loadQuestion(questionIds[0]);
+  }, [questionIds]);
+
+  function anseweredQuestion(question: QuestionModel) {}
+
+  function goToNextStep() {}
 
   return (
     <div
@@ -35,13 +57,15 @@ export default function Home() {
         alignItems: "center",
       }}
     >
-      <Question
-        value={question}
-        onResponse={onResponse}
-        timeIsOver={timeIsOver}
-        timeToResponse={11}
+      <Quiz
+        question={question}
+        last={true}
+        anseweredQuestion={anseweredQuestion}
+        goToNextStep={goToNextStep}
       />
-      <Button text="Proxima" href="/result"  />
     </div>
   );
 }
+
+// ideia de commit 
+// 
