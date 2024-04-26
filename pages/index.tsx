@@ -1,4 +1,5 @@
 import Question from "@/components/Question";
+import Button from "@/components/Button";
 import AnswerModel from "@/model/answer";
 import QuestionModel from "@/model/question";
 import { useState } from "react";
@@ -19,7 +20,7 @@ export default function Home() {
 
   function timeIsOver(): void {
     // * -1 significa que o usuário não respondeu a tempo e a resposta é considerada errada
-    if(question.isNotAnswered) {
+    if (question.isNotAnswered) {
       setQuestion(question.answerWith(-1));
     }
   }
@@ -29,15 +30,18 @@ export default function Home() {
       style={{
         display: "flex",
         height: "100vh",
+        flexDirection: "column",
         justifyContent: "center",
         alignItems: "center",
       }}
     >
-      <Question 
-      value={question}
-      onResponse={onResponse}
-      timeIsOver={timeIsOver}
-      timeToResponse={11} />
+      <Question
+        value={question}
+        onResponse={onResponse}
+        timeIsOver={timeIsOver}
+        timeToResponse={11}
+      />
+      <Button text="Proxima" href="/result"  />
     </div>
   );
 }
