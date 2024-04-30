@@ -53,6 +53,11 @@ export default function Home() {
     return undefined;
   }
 
+  function goToNextStep(): void {
+    const nextId = idNextQuestion();
+    nextId ? goToNextQuestion(nextId) : finish();
+  }
+
 
 
   function finish(): void {
