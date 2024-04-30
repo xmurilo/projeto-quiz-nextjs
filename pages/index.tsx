@@ -58,7 +58,9 @@ export default function Home() {
     nextId ? goToNextQuestion(nextId) : finish();
   }
 
-
+  function goToNextQuestion(idNext: number): void {
+    loadQuestion(idNext);
+  }
 
   function finish(): void {
     router.push({
