@@ -67,7 +67,7 @@ export default function Home() {
       pathname: "/result",
       query: {
         total: questionIds.length,
-        right: rightAnswers,
+        rightAnswers: rightAnswers,
       },
     });
   }
