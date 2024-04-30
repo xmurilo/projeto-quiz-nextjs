@@ -2,7 +2,6 @@ import AnswerModel from "@/model/answer";
 import QuestionModel from "@/model/question";
 import { useEffect, useState } from "react";
 import Quiz from "@/components/Quiz";
-import { basename } from "path";
 
 const questionMock = new QuestionModel(1, "Melhor cor?", [
   AnswerModel.isCorrect("Roxo"),
@@ -29,7 +28,8 @@ export default function Home() {
     try {
       const resp = await fetch(`${BASE_URL}/questions/${idQuestion}`);
       const json = await resp.json();
-      console.log(json);
+      const newQuestion = QuestionModel.createUsingObject(json);
+      setQuestion(newQuestion);
     } catch (e) {
       console.log(e);
     }
@@ -59,13 +59,10 @@ export default function Home() {
     >
       <Quiz
         question={question}
-        last={true}
+        last={false}
         anseweredQuestion={anseweredQuestion}
         goToNextStep={goToNextStep}
       />
     </div>
   );
 }
-
-// ideia de commit 
-// 
