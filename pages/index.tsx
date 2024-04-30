@@ -2,17 +2,13 @@ import AnswerModel from "@/model/answer";
 import QuestionModel from "@/model/question";
 import { useEffect, useState } from "react";
 import Quiz from "@/components/Quiz";
-
-const questionMock = new QuestionModel(1, "Melhor cor?", [
-  AnswerModel.isCorrect("Roxo"),
-  AnswerModel.isWrong("Vermelha"),
-  AnswerModel.isWrong("Azul"),
-  AnswerModel.isWrong("Amarelo"),
-]);
+import { useRouter } from "next/router";
 
 const BASE_URL = "http://localhost:3000/api";
 export default function Home() {
-  const [question, setQuestion] = useState<QuestionModel>(questionMock);
+  const router = useRouter();
+
+  const [question, setQuestion] = useState<QuestionModel>();
   const [questionIds, setQuestionsIds] = useState<number[]>([]);
   const [rightAnswers, setRightAnswers] = useState(0);
   async function loadQuestionsIds() {
@@ -43,30 +39,40 @@ export default function Home() {
     questionIds.length > 0 && loadQuestion(questionIds[0]);
   }, [questionIds]);
 
-  function anseweredQuestion(questionAnsewered: QuestionModel) {
+  function anseweredQuestion(questionAnsewered: QuestionModel): void {
     setQuestion(questionAnsewered);
     const isRight = questionAnsewered.isCorrect;
     setRightAnswers(rightAnswers + (isRight ? 1 : 0));
   }
 
-  function goToNextStep() {}
+  function idNextQuestion(): number | undefined {
+    if (question) {
+      const nextIndex = questionIds.indexOf(question.id) + 1;
+      return questionIds[nextIndex];
+    }
+    return undefined;
+  }
 
-  return (
-    <div
-      style={{
-        display: "flex",
-        height: "100vh",
-        flexDirection: "column",
-        justifyContent: "center",
-        alignItems: "center",
-      }}
-    >
-      <Quiz
-        question={question}
-        last={false}
-        anseweredQuestion={anseweredQuestion}
-        goToNextStep={goToNextStep}
-      />
-    </div>
+
+
+  function finish(): void {
+    router.push({
+      pathname: "/result",
+      query: {
+        total: questionIds.length,
+        right: rightAnswers,
+      },
+    });
+  }
+
+  return question ? (
+    <Quiz
+      question={question}
+      last={idNextQuestion() === undefined}
+      anseweredQuestion={anseweredQuestion}
+      goToNextStep={goToNextStep}
+    />
+  ) : (
+    false
   );
 }
