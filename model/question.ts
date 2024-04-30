@@ -45,7 +45,7 @@ export default class QuestionModel {
   get isNotAnswered(): boolean {
     return !this._answered;
   }
-  
+
   get anyAnswerRevealed(): boolean {
     for (let answer of this._answers) {
       if (answer.revealed) return true;
@@ -63,6 +63,11 @@ export default class QuestionModel {
 
     const isAnswered = true;
     return new QuestionModel(this._id, this._statement, answers, itRight, isAnswered);
+  }
+
+  static createUsingObject(obj: QuestionModel): QuestionModel {
+    const answers = obj._answers.map(AnswerModel.createUsingObject);
+    return new QuestionModel(obj._id, obj._statement, answers, obj._isCorrect, obj._answered);
   }
 
   shuffleAnswers(): QuestionModel {
