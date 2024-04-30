@@ -4,7 +4,7 @@
 
 ## Description
 This is a quiz where you can test your knowledge, this application is from a course
-that i'm doing, the course is from Udemy, the course is called "Next.js e React - Curso Completo - Aprenda com Projetos"
+that i'm doing, the course is from Udemy, the course is called "Next.js e React - Aprenda com Projetos"
 
 
 ## Main Screen
