@@ -22,8 +22,6 @@ ESLint
 
 
 ## How to run
-1. Clone this repository
-2. Install dependencies
 ```bash
 # Clone the repository
 git clone https://github.com/xmurilo/projeto-quiz-nextjs.git
